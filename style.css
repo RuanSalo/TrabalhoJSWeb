@@ -1,0 +1,41 @@
+body {
+	display: table;
+	width: 100%;
+	height: 100vh;
+	color: white;
+	background: url("img/fundo.jpg") no-repeat bottom center scroll;
+	background-position: 30% 45%;
+	background-size: cover;
+}
+
+#titulo {
+	background-color: blanchedalmond;
+}
+
+#area-util {
+	background-color: rgb(19, 19, 167);
+}
+
+#area-util p {
+	background-color: darkred;
+	color: white;
+}
+
+#alternativas button {
+	background-color: darkred;
+    color: white;
+    border-color: darkred;
+}
+
+#alternativas button:focus{
+    background-color: green;
+    border-color: green;
+}
+
+#imagens {
+	width: 300px;
+}
+
+.escondido {
+	display: none;
+  }
