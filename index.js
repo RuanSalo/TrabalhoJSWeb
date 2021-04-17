@@ -4,6 +4,7 @@ const elementos = {
 	cabecalho: document.querySelector("#cabecalho"),
 	texto: document.querySelector("#texto"),
 	telaAlternativas: document.querySelector("#alternativas"),
+	telaBotoesFuncionais: document.querySelector("#botoesFuncionais"),
 	animacoes: document.querySelector("#animacoes"),
 	botoes: {
 		botao1: document.querySelector(".botao1"),
@@ -28,11 +29,29 @@ const carregarCategorias = () => {
 	});
 }
 
+const carregarJogo = () =>{
+	if (elementos.botoes.botao1.classList.contains('checked')) {
+		jogo.dificuldade = 'easy';
+	}
+	else if (elementos.botoes.botao2.classList.contains('checked')) {
+		jogo.dificuldade = 'medium';
+	}
+	else if (elementos.botoes.botao3.classList.contains('checked')) {
+		jogo.dificuldade = 'hard';
+	}
+	jogo.categoria = elementos.selectCategoria.options[elementos.selectCategoria.selectedIndex].value;
+	console.log(jogo.categoria);
+	console.log(jogo.dificuldade);
+}
+
 const novoJogo = () => {
 	jogo = {
 		dificuldade: undefined,
 		categoria: undefined,
 		pontos: undefined,
+		pergunta: undefined,
+		perguntaArmazenada: undefined,
+		chances: 3,
 	};
 
 	carregarCategorias();
@@ -47,6 +66,8 @@ const novoJogo = () => {
 	elementos.botoes.botaoConfirma.textContent = "Confirmar";
 	elementos.botoes.botaoArmazenaPergunta.classList.remove("escondido");
 	elementos.botoes.botaoArmazenaPergunta.classList.add("escondido");
+	elementos.botoes.botaoConfirma.addEventListener('click', carregarJogo);
+	
 };
 
 novoJogo();

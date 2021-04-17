@@ -21,21 +21,44 @@ body {
 	color: white;
 }
 
+.selectCategoria {
+	background-color: darkred;
+	color: white;
+	border-color: darkred;
+}
+
 #alternativas button {
 	background-color: darkred;
-    color: white;
-    border-color: darkred;
+	color: white;
+	border-color: darkred;
 }
 
-.selectCategoria{
+#alternativas button:hover {
+	background-color: green;
+	border-color: green;
+	font-weight: bold;
+}
+
+#alternativas button:checked {
+	background-color: green;
+	border-color: green;
+}
+
+#botoesFuncionais button {
 	background-color: darkred;
-    color: white;
-    border-color: darkred;
+	color: white;
+	border-color: darkred;
 }
 
-#alternativas button:focus{
-    background-color: green;
-    border-color: green;
+#botoesFuncionais button:hover {
+	background-color: green;
+	border-color: green;
+	font-weight: bold;
+}
+
+#botoesFuncionais button:checked {
+	background-color: green;
+	border-color: green;
 }
 
 #imagens {
@@ -44,4 +67,4 @@ body {
 
 .escondido {
 	display: none;
-  }
+}
