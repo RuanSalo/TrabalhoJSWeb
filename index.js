@@ -36,11 +36,17 @@ const carregarJogo = () =>{
 	console.log(jogo.dificuldade);
 }
 
+const definirDificuldade = () =>{
+	elementos.botoes.botao1.addEventListener('click', () => {jogo.dificuldade = 'easy'})
+	elementos.botoes.botao2.addEventListener('click', () => {jogo.dificuldade = 'medium'})
+	elementos.botoes.botao3.addEventListener('click', () => {jogo.dificuldade = 'hard'})
+}
+
 const novoJogo = () => {
 	jogo = {
 		dificuldade: undefined,
 		categoria: undefined,
-		pontos: undefined,
+		pontos: 0,
 		pergunta: undefined,
 		perguntaArmazenada: undefined,
 		chances: 3,
@@ -59,9 +65,7 @@ const novoJogo = () => {
 	elementos.botoes.botaoArmazenaPergunta.classList.remove("escondido");
 	elementos.botoes.botaoArmazenaPergunta.classList.add("escondido");
 	elementos.botoes.botaoConfirma.addEventListener('click', carregarJogo);
-	elementos.botoes.botao1.addEventListener('click', () => {jogo.dificuldade = 'easy'})
-	elementos.botoes.botao2.addEventListener('click', () => {jogo.dificuldade = 'medium'})
-	elementos.botoes.botao3.addEventListener('click', () => {jogo.dificuldade = 'hard'})
+	definirDificuldade();
 };
 
 novoJogo();

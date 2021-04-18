@@ -39,7 +39,7 @@ body {
 	font-weight: bold;
 }
 
-#alternativas button:checked {
+#alternativas button:focus {
 	background-color: green;
 	border-color: green;
 }
