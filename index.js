@@ -30,15 +30,7 @@ const carregarCategorias = () => {
 }
 
 const carregarJogo = () =>{
-	if (elementos.botoes.botao1.classList.contains('checked')) {
-		jogo.dificuldade = 'easy';
-	}
-	else if (elementos.botoes.botao2.classList.contains('checked')) {
-		jogo.dificuldade = 'medium';
-	}
-	else if (elementos.botoes.botao3.classList.contains('checked')) {
-		jogo.dificuldade = 'hard';
-	}
+	
 	jogo.categoria = elementos.selectCategoria.options[elementos.selectCategoria.selectedIndex].value;
 	console.log(jogo.categoria);
 	console.log(jogo.dificuldade);
@@ -67,7 +59,9 @@ const novoJogo = () => {
 	elementos.botoes.botaoArmazenaPergunta.classList.remove("escondido");
 	elementos.botoes.botaoArmazenaPergunta.classList.add("escondido");
 	elementos.botoes.botaoConfirma.addEventListener('click', carregarJogo);
-	
+	elementos.botoes.botao1.addEventListener('click', () => {jogo.dificuldade = 'easy'})
+	elementos.botoes.botao2.addEventListener('click', () => {jogo.dificuldade = 'medium'})
+	elementos.botoes.botao3.addEventListener('click', () => {jogo.dificuldade = 'hard'})
 };
 
 novoJogo();
