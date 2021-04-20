@@ -1,4 +1,5 @@
 const proxy = "https://secret-ocean-49799.herokuapp.com/";
+const urlBase = "https://opentdb.com/";
 let jogo;
 const elementos = {
 	cabecalho: document.querySelector("#cabecalho"),
@@ -16,32 +17,59 @@ const elementos = {
 	},
 	selectCategoria: document.querySelector(".selectCategoria"),
 };
-
 const carregarCategorias = () => {
-	axios.get(`${proxy}https://opentdb.com/api_category.php`).then((response) => {
+	axios.get(`${proxy}${urlBase}api_category.php`).then((response) => {
 		const categorias = response.data.trivia_categories;
 		for (const categoria of categorias) {
 			const option = document.createElement("option");
-			option.innerHTML += `<option value="${categoria.id}">${categoria.name}</option>`;
+			option.value = categoria.id;
+			option.appendChild(document.createTextNode(categoria.name));
 			elementos.selectCategoria.appendChild(option);
-
 		}
 	});
-}
-
-const carregarJogo = () =>{
-	
-	jogo.categoria = elementos.selectCategoria.options[elementos.selectCategoria.selectedIndex].value;
+};
+const carregarJogo = () => {
+	jogo.categoria =
+		elementos.selectCategoria.options[
+			elementos.selectCategoria.selectedIndex
+		].value;
 	console.log(jogo.categoria);
 	console.log(jogo.dificuldade);
-}
+	carregarTela();
+};
+const carregarTela = () => {
+	axios
+		.get(
+			`${proxy}${urlBase}api.php?amount=1&category=${jogo.categoria}&difficulty=${jogo.dificuldade}`
+		)
+		.then((response) => {
+			jogo.pergunta = response.data.results[0];
 
-const definirDificuldade = () =>{
-	elementos.botoes.botao1.addEventListener('click', () => {jogo.dificuldade = 'easy'})
-	elementos.botoes.botao2.addEventListener('click', () => {jogo.dificuldade = 'medium'})
-	elementos.botoes.botao3.addEventListener('click', () => {jogo.dificuldade = 'hard'})
-}
-
+			console.log(jogo.pergunta);
+			elementos.botoes.botao4.classList.remove("escondido");
+			elementos.botoes.botaoArmazenaPergunta.classList.remove("escondido");
+			elementos.selectCategoria.classList.add("escondido");
+			elementos.cabecalho.textContent = `${jogo.pergunta.category}`;
+			elementos.texto.textContent = `${jogo.pergunta.question}`;
+			elementos.botoes.botao1.textContent = `${jogo.pergunta.correct_answer}`;
+			elementos.botoes.botao2.textContent = "resposta 2";
+			elementos.botoes.botao3.textContent = "resposta 3";
+			elementos.botoes.botao4.textContent = "resposta 4";
+			elementos.botoes.botaoConfirma.textContent = "Responder";
+			elementos.botoes.botaoArmazenaPergunta.textContent = "Armazenar pergunta";
+		});
+};
+const definirDificuldade = () => {
+	elementos.botoes.botao1.addEventListener("click", () => {
+		jogo.dificuldade = "easy";
+	});
+	elementos.botoes.botao2.addEventListener("click", () => {
+		jogo.dificuldade = "medium";
+	});
+	elementos.botoes.botao3.addEventListener("click", () => {
+		jogo.dificuldade = "hard";
+	});
+};
 const novoJogo = () => {
 	jogo = {
 		dificuldade: undefined,
@@ -51,9 +79,7 @@ const novoJogo = () => {
 		perguntaArmazenada: undefined,
 		chances: 3,
 	};
-
 	carregarCategorias();
-
 	elementos.cabecalho.textContent = "Bem Vindo!";
 	elementos.texto.textContent = "Selecione a dificuldade e categoria:";
 	elementos.botoes.botao1.textContent = "Fácil";
@@ -64,8 +90,7 @@ const novoJogo = () => {
 	elementos.botoes.botaoConfirma.textContent = "Confirmar";
 	elementos.botoes.botaoArmazenaPergunta.classList.remove("escondido");
 	elementos.botoes.botaoArmazenaPergunta.classList.add("escondido");
-	elementos.botoes.botaoConfirma.addEventListener('click', carregarJogo);
+	elementos.botoes.botaoConfirma.addEventListener("click", carregarJogo);
 	definirDificuldade();
 };
-
 novoJogo();
